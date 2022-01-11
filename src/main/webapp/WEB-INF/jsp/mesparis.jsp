@@ -8,9 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Mes paris</title>
 </head>
 <body>
-
+<h3>Nom util</h3>
+<ul>
+    <% for(int i = 0; i < 3; i++) { %>
+    <li> sport : ##### - ####### vs ####### - le ##############. Mise de ### sur #### <a href="">Annuler</a></li>
+    <% } %>
+</ul>
+<a href="#">Retour au menu</a>
 </body>
 </html>

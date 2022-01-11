@@ -8,9 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Confirmation du pari</title>
 </head>
 <body>
-
+<h3>Nom util</h3>
+<p>Vous avez parié #### euros sur le résultat nul pour le match : ###### vs ###### le ##################</p>
+<a href="#">Retour au menu</a>
 </body>
 </html>

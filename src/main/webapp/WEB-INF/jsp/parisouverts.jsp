@@ -8,9 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Liste des paris ouverts</title>
 </head>
 <body>
-
+<h3>Nom util</h3>
+<ul>
+    <% for (int i=0; i < 3;i++) { %>
+    <li>
+        sport : #### - ###### vs ##### - <a href="#">parier</a>
+    </li>
+    <% } %>
+</ul>
+<a>Retour au menu</a>
 </body>
 </html>

@@ -8,9 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Paris en ligne</title>
 </head>
 <body>
-
+<h3>Nom util</h3>
+<form method="post" action="/pel/connexion">
+    <label for="field:pseudo"> Saisir votre pseudo</label> <input name="pseudo" id="field:pseudo" type="text">
+    <label for="field:password"> Saisir votre mot de passe</label><input name="password" id="field:password" type="password">
+    <input type="submit">
+</form>
 </body>
 </html>
