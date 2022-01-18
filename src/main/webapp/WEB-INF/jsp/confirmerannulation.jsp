@@ -10,9 +10,9 @@
 <head>
     <title>Confirmation du pari</title>
 </head>
-<body>
-<h3>Nom util</h3>
-<p> La mise de #### euros sur le résultat #### pour le match : ####### vs ####### le ######################## a bien été annulée !</p>
-<a href="#">Retour au menu</a>
-</body>
+    <body>
+        <h3>Nom util</h3>
+        <p> La mise de #### euros sur le résultat #### pour le match : ####### vs ####### le ######################## a bien été annulée !</p>
+        <a href="#">Retour au menu</a>
+    </body>
 </html>

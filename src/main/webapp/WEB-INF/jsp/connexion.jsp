@@ -10,12 +10,12 @@
 <head>
     <title>Paris en ligne</title>
 </head>
-<body>
-<h3>Nom util</h3>
-<form method="post" action="/pel/connexion">
-    <label for="field:pseudo"> Saisir votre pseudo</label> <input name="pseudo" id="field:pseudo" type="text">
-    <label for="field:password"> Saisir votre mot de passe</label><input name="password" id="field:password" type="password">
-    <input type="submit">
-</form>
-</body>
+    <body>
+    <h1>Connexion</h1>
+        <form method="post" action="/pel/connexion">
+            <label for="field:login"> Saisir votre pseudo</label> <input name="login" id="field:login" type="text"><br>
+            <label for="field:password"> Saisir votre mot de passe</label><input name="password" id="field:password" type="password"><br>
+            <input type="submit" value="Connexion">
+        </form>
+    </body>
 </html>

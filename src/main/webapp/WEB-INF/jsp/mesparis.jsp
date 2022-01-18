@@ -17,6 +17,6 @@
     <li> sport : ##### - ####### vs ####### - le ##############. Mise de ### sur #### <a href="">Annuler</a></li>
     <% } %>
 </ul>
-<a href="#">Retour au menu</a>
+<a href="/pel/menu">Retour au menu</a>
 </body>
 </html>

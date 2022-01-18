@@ -15,9 +15,9 @@
 <h2>Menu</h2>
 
 <ul>
-    <li><a href="#">Afficher les matchs sur lequels parier</a></li>
-    <li><a href="#">Afficher mes paris</a></li>
-    <li><a href="#">Deconnexion</a></li>
+    <li><a href="/pel/parisouverts">Afficher les matchs sur lequels parier</a></li>
+    <li><a href="/pel/mesparis">Afficher mes paris</a></li>
+    <li><a href="/pel/deconnexion">Deconnexion</a></li>
 </ul>
 
 </body>
