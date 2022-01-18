@@ -1,6 +1,9 @@
 package controleur;
 
 import facade.FacadeParis;
+import facade.exceptions.InformationsSaisiesIncoherentesException;
+import facade.exceptions.UtilisateurDejaConnecteException;
+import modele.Utilisateur;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,7 +44,22 @@ public class Pel extends HttpServlet {
                 destination = "/WEB-INF/jsp/mesparis.jsp";
                 break;
             case CONNEXION:
-                destination = "/WEB-INF/jsp/menu.jsp";
+                String login = req.getParameter("login");
+                String pwd = req.getParameter("password");
+                Utilisateur utilisateur = null;
+                String erreur = "";
+                try {
+                    utilisateur = facadeParis.connexion(login,pwd);
+                    req.getSession().setAttribute("util",utilisateur);
+                    destination = "/WEB-INF/jsp/menu.jsp";
+                } catch (UtilisateurDejaConnecteException e) {
+                    destination = PAGE_DEFAUT;
+                    erreur += "login ou mdp incorrect";
+                } catch (InformationsSaisiesIncoherentesException e) {
+                    destination = PAGE_DEFAUT;
+                    erreur += "login ou mdp incorrect";
+                }
+                req.setAttribute("erreur",erreur);
                 break;
         }
 

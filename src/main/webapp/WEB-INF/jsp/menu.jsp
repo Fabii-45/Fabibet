@@ -9,16 +9,17 @@
 <html>
 <head>
     <title>Paris en ligne</title>
+    <jsp:useBean id="util" type="modele.Utilisateur" scope="session"></jsp:useBean>
 </head>
 <body>
-<h3>Nom util</h3>
-<h2>Menu</h2>
+    <h3>${util.login}</h3>
+        <h2>Menu</h2>
 
-<ul>
-    <li><a href="/pel/parisouverts">Afficher les matchs sur lequels parier</a></li>
-    <li><a href="/pel/mesparis">Afficher mes paris</a></li>
-    <li><a href="/pel/deconnexion">Deconnexion</a></li>
-</ul>
+        <ul>
+            <li><a href="/pel/parisouverts">Afficher les matchs sur lequels parier</a></li>
+            <li><a href="/pel/mesparis">Afficher mes paris</a></li>
+            <li><a href="/pel/deconnexion">Deconnexion</a></li>
+        </ul>
 
-</body>
+    </body>
 </html>
