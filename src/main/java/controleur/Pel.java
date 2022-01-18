@@ -1,5 +1,7 @@
 package controleur;
 
+import facade.FacadeParis;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,35 +12,37 @@ import java.io.IOException;
 
 @WebServlet(name = "pel", urlPatterns = "/pel/*")
 public class Pel extends HttpServlet {
-    private final static String PAGE_DEFAUT = "/WEB-INF/jsp/connexion.jsp";
-    private final static String CONNEXION = "connexion";
-    private final static String DECONNEXION = "deconnexion";
-    private final static String MENU = "menu";
-    private final static String PARISOUVERTS = "parisouverts";
-    private final static String MESPARIS = "mesparis";
+    public final static String PAGE_DEFAUT = "/WEB-INF/jsp/connexion.jsp";
+    public final static String CONNEXION = "connexion";
+    public final static String DECONNEXION = "deconnexion";
+    public final static String MENU = "menu";
+    public final static String PARISOUVERTS = "parisouverts";
+    public final static String MESPARIS = "mesparis";
+    public final static String SERVELTNAME = "pel";
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        FacadeParis facadeParis = (FacadeParis) getServletContext().getAttribute("facade");
         String destination = PAGE_DEFAUT;
         String[] chemin = req.getRequestURI().split("/");
         String cleNavigation = chemin[chemin.length-1];
 
         switch (cleNavigation){
-            case "deconnexion":
+            case DECONNEXION:
                 destination = PAGE_DEFAUT;
                 break;
-            case "menu":
+            case MENU:
                 destination = "/WEB-INF/jsp/menu.jsp";
                 break;
-            case "parisouverts":
+            case PARISOUVERTS:
                 destination = "/WEB-INF/jsp/parisouverts.jsp";
                 break;
-            case "mesparis":
+            case MESPARIS:
                 destination = "/WEB-INF/jsp/mesparis.jsp";
                 break;
-            case "connexion":
+            case CONNEXION:
                 destination = "/WEB-INF/jsp/menu.jsp";
                 break;
-
         }
 
 
