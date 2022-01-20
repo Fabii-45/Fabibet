@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: o2194514
@@ -8,11 +9,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
+
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
         <title>Liste des paris ouverts</title>
+
         <jsp:useBean id="util" type="modele.Utilisateur" scope="session"></jsp:useBean>
+        <jsp:useBean id="matchs" type="java.util.Collection<modele.Match>" scope="request"/>
     </head>
     <style>
         body {
@@ -22,13 +27,14 @@
     </style>
     <body>
     <h1>Vous pouvez pariez sur les match suivants</h1>
-        <ul>
-            <% for (int i=0; i < 3;i++) { %>
-            <li>
-                sport : #### - ###### vs ##### - <a href="#">parier</a>
-            </li>
-            <% } %>
-        </ul>
-        <a href="/pel/menu">Retour au menu</a>
+
+    <ul>
+    <c:forEach items="${matchs}" var="x">
+        <li>
+            ${x.sport} : ${x.equipe1} vs ${x.equipe2} - <a href="/pel/pariermatch?id=${x.idMatch}">parier</a>
+        </li>
+    </c:forEach>
+    </ul>
+    <a href="/pel/menu">Retour au menu</a>
     </body>
 </html>

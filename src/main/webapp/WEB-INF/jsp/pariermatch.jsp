@@ -13,21 +13,24 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Confirmation du pari</title>
     <jsp:useBean id="util" type="modele.Utilisateur" scope="session"></jsp:useBean>
+    <jsp:useBean id="match" type="modele.Match" scope="session"></jsp:useBean>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
 <body>
-<h3>Pari sur un match</h3>
-<h3>Nom util</h3>
-<p>vous voulez parier sur le match : ####### vs ####### le ####################</p>
-<label for="pari-select">Choose a pet:</label>
+<h1>Pari sur le match ${match.idMatch}</h1>
+<p>Vous voulez parier sur le match : ${match.equipe1} vs ${match.equipe2} le ${match.quand}</p>
+<form action="/pel/parier">
+    <label for="pari-select">Choisissez un résultat</label>
+    <select name="pari" id="pari-select">
+        <option value="nul">nul</option>
+        <option value="${match.equipe1}">${match.equipe1} gagnant</option>
+        <option value="${match.equipe2}">${match.equipe2} gagnant</option>
+    </select>
+    <label for="mise">Montant</label>
+    <input name="mise" id="mise" type="number">
+    <a href="/pel/confirmerpari"><input type="submit" value="Parier"></a>
 
-<select name="pari" id="pari-select">
-    <option value="nul">nul</option>
-    <option value="equipe1">equipe1</option>
-    <option value="equipe2">equipe2</option>
-</select>
-<label for="field:mise">Montant</label><input name="mise" id="field:mise" type="number">
-<input type="submit">
+</form>
 </body>
 </html>

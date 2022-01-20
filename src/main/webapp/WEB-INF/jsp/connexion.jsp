@@ -42,9 +42,9 @@
                                 <div class="form-group">
                                     <input type="submit" name="submit" class="btn btn-info btn-md" value="Connexion">
                                     <c:if test = "${erreur.length() > 0}">
-                                        <span style="color:red;">
+                                        <p style="color:red;">
                                             <c:out value = "${erreur}"></c:out>
-                                        </span>
+                                        </p>
                                     </c:if>
                                 </div>
                             </form>
