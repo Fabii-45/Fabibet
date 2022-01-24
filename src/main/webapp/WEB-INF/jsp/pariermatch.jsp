@@ -29,8 +29,7 @@
     </select>
     <label for="mise">Montant</label>
     <input name="mise" id="mise" type="number">
-    <a href="/pel/confirmerpari"><input type="submit" value="Parier"></a>
-
+    <a href="/pel/parier"><input type="submit" value="Parier"></a>
 </form>
 </body>
 </html>

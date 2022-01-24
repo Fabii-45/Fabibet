@@ -1,11 +1,11 @@
 package controleur;
 
 import facade.FacadeParis;
-import facade.exceptions.InformationsSaisiesIncoherentesException;
-import facade.exceptions.UtilisateurDejaConnecteException;
+import facade.exceptions.*;
 import modele.Match;
 import modele.Utilisateur;
 
+import static java.lang.Float.parseFloat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +25,7 @@ public class Pel extends HttpServlet {
     public final static String PARISOUVERTS = "parisouverts";
     public final static String MESPARIS = "mesparis";
     public final static String PARI = "pariermatch";
-    public final static String CONFIRMERPARI = "confirmerpari";
+    public final static String PARIER = "parier";
     public final static String SERVELTNAME = "pel";
 
     @Override
@@ -48,14 +48,35 @@ public class Pel extends HttpServlet {
                 destination = "/WEB-INF/jsp/pariermatch.jsp";
                 break;
             }
-            case CONFIRMERPARI:{
 
-                //RECUPERER LES VARIABLES DONNES EN ADRESSE
-
-                Long idMatch = Long.parseLong(req.getParameter("id"));
-                Match match = facadeParis.getMatch(idMatch);
-                req.getSession().setAttribute("match",match);
-                destination = "/WEB-INF/jsp/confirmerpari.jsp";
+            case PARIER:{
+                Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("util");
+                if (utilisateur == null)
+                    destination = PAGE_DEFAUT;
+                else {
+                    String pari = req.getParameter("pari");
+                    Float mise = parseFloat(req.getParameter("mise"));
+                    String erreur = "";
+                    Match match = (Match) req.getSession().getAttribute("match");
+                    try {
+                        facadeParis.parier(utilisateur.getLogin(), match.getIdMatch(), pari, mise);
+                        req.setAttribute("pari", pari);
+                        req.setAttribute("mise", mise);
+                        destination = "/WEB-INF/jsp/confirmerpari.jsp";
+                    } catch (MatchClosException e) {
+                        erreur = "Match fermé aux paris !";
+                        destination = "/WEB-INF/jsp/pariermatch.jsp";
+                        req.setAttribute("erreur", erreur);
+                    } catch (ResultatImpossibleException e) {
+                        erreur = "Résultat impossible !";
+                        destination = "/WEB-INF/jsp/pariermatch.jsp";
+                        req.setAttribute("erreur", erreur);
+                    } catch (MontantNegatifOuNulException e) {
+                        erreur = "Vous ne pouvez pas parier 0€ !";
+                        destination = "/WEB-INF/jsp/pariermatch.jsp";
+                        req.setAttribute("erreur", erreur);
+                    }
+                }
                 break;
             }
             case PARISOUVERTS: {
