@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Confirmation du pari</title>
+    <title>Confirmer annulation du pari</title>
+    <jsp:useBean id="util" type="modele.Utilisateur" scope="session"></jsp:useBean>
+    <jsp:useBean id="pari" type="modele.Pari" scope="session"></jsp:useBean>
 </head>
     <body>
         <h3>Nom util</h3>

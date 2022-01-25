@@ -3,6 +3,7 @@ package controleur;
 import facade.FacadeParis;
 import facade.exceptions.*;
 import modele.Match;
+import modele.Pari;
 import modele.Utilisateur;
 
 import static java.lang.Float.parseFloat;
@@ -26,6 +27,7 @@ public class Pel extends HttpServlet {
     public final static String MESPARIS = "mesparis";
     public final static String PARI = "pariermatch";
     public final static String PARIER = "parier";
+    public final static String ANNNULERPARI = "annulerpari";
     public final static String SERVELTNAME = "pel";
 
     @Override
@@ -64,17 +66,17 @@ public class Pel extends HttpServlet {
                         req.setAttribute("mise", mise);
                         destination = "/WEB-INF/jsp/confirmerpari.jsp";
                     } catch (MatchClosException e) {
-                        erreur = "Match fermé aux paris !";
-                        destination = "/WEB-INF/jsp/pariermatch.jsp";
+                        erreur += "Match fermé aux paris !";
                         req.setAttribute("erreur", erreur);
+                        destination = "/WEB-INF/jsp/pariermatch.jsp";
                     } catch (ResultatImpossibleException e) {
-                        erreur = "Résultat impossible !";
-                        destination = "/WEB-INF/jsp/pariermatch.jsp";
+                        erreur += "Résultat impossible !";
                         req.setAttribute("erreur", erreur);
+                        destination = "/WEB-INF/jsp/pariermatch.jsp";
                     } catch (MontantNegatifOuNulException e) {
-                        erreur = "Vous ne pouvez pas parier 0€ !";
-                        destination = "/WEB-INF/jsp/pariermatch.jsp";
+                        erreur += "Vous ne pouvez pas parier 0€ !";
                         req.setAttribute("erreur", erreur);
+                        destination = "/WEB-INF/jsp/pariermatch.jsp";
                     }
                 }
                 break;
@@ -86,7 +88,34 @@ public class Pel extends HttpServlet {
                 break;
             }
             case MESPARIS: {
-                destination = "/WEB-INF/jsp/mesparis.jsp";
+                Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("util");
+                if (utilisateur == null)
+                    destination = PAGE_DEFAUT;
+                else {
+                    String login = utilisateur.getLogin();
+                    Collection<Pari> lesParis = facadeParis.getMesParis(login);
+                    req.setAttribute("paris", lesParis);
+                    destination = "/WEB-INF/jsp/mesparis.jsp";
+                }
+                break;
+            }
+            case ANNNULERPARI: {
+                Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("util");
+                if (utilisateur == null)
+                    destination = PAGE_DEFAUT;
+                else {
+                    Long idPari = Long.parseLong(req.getParameter("id"));
+                    Pari pari = facadeParis.getPari(idPari);
+                    req.getSession().setAttribute("pari",pari);
+                    try {
+                        facadeParis.annulerPari(utilisateur.getLogin(), idPari);
+                    } catch (OperationNonAuthoriseeException e) {
+                        e.printStackTrace();
+                    }
+                    destination = "/WEB-INF/jsp/confirmerannulation.jsp";
+                }
+
+
                 break;
             }
             case CONNEXION: {
@@ -96,9 +125,11 @@ public class Pel extends HttpServlet {
                 String erreur = "";
                 if (login == null || login.length() < 2) {
                     erreur += " Le pseudo est obligatoire et de taille 2 minimum.";
+                    req.setAttribute("erreur", erreur);
                 }
                 else if (Objects.isNull(pwd) || pwd.length() < 2) {
                     erreur += " Le mot de passe est obligatoire et de taille 2 minimum.";
+                    req.setAttribute("erreur", erreur);
                 }
                 else {
                     try {
@@ -108,9 +139,11 @@ public class Pel extends HttpServlet {
                     } catch (UtilisateurDejaConnecteException e) {
                         destination = PAGE_DEFAUT;
                         erreur += "login ou mdp incorrect";
+                        req.setAttribute("erreur", erreur);
                     } catch (InformationsSaisiesIncoherentesException e) {
                         destination = PAGE_DEFAUT;
                         erreur += "login ou mdp incorrect";
+                        req.setAttribute("erreur", erreur);
                     }
                 }
                 break;

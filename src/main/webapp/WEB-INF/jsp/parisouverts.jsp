@@ -26,7 +26,7 @@
         }
     </style>
     <body>
-    <h1>Vous pouvez pariez sur les match suivants</h1>
+    <h1>Vous pouvez parier sur les matchs suivants</h1>
 
     <ul>
     <c:forEach items="${matchs}" var="x">

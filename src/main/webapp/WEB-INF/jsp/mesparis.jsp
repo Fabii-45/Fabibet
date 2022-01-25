@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: o2194514
@@ -13,6 +14,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Mes paris</title>
     <jsp:useBean id="util" type="modele.Utilisateur" scope="session"></jsp:useBean>
+    <jsp:useBean id="paris" type="java.util.Collection<modele.Pari>" scope="request"/>
 </head>
 <style>
     body {
@@ -23,9 +25,11 @@
 <body>
 <h1>Les paris de ${util.login}</h1>
 <ul>
-    <% for(int i = 0; i < 3; i++) { %>
-    <li> sport : ##### - ####### vs ####### - le ##############. Mise de ### sur #### <a href="">Annuler</a></li>
-    <% } %>
+    <c:forEach items="${paris}" var="x">
+        <li>
+                ${x.match.sport} : ${x.match.equipe1} vs ${x.match.equipe2} - ${x.montant} sur ${x.vainqueur} <a href="/pel/annulerpari?id=${x.idPari}">Annuler</a>
+        </li>
+    </c:forEach>
 </ul>
 <a href="/pel/menu">Retour au menu</a>
 </body>
