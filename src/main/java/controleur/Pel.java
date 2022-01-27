@@ -40,6 +40,9 @@ public class Pel extends HttpServlet {
 
         switch (cleNavigation){
             case MENU:{
+                Utilisateur utilisateur = (Utilisateur) req.getSession().getAttribute("util");
+                boolean estAdmin = utilisateur.isAdmin();
+                req.getSession().setAttribute("estAdmin",estAdmin);
                 destination = "/WEB-INF/jsp/menu.jsp";
                 break;
             }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: o2194514
@@ -42,6 +43,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/pel/mesparis">Mes Paris</a>
                     </li>
+                    <c:if test = "${util.admin == true}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/nouveaumatch">Afficher Nouveau Match</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/saisirresultats">Saisir des Résultats</a>
+                        </li>
+                    </c:if>
                 </ul>
                 <span class="navbar-text">
                   <a href="/pel/deconnexion">Deconnexion</a>

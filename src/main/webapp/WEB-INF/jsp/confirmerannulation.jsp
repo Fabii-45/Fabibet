@@ -13,8 +13,8 @@
     <jsp:useBean id="pari" type="modele.Pari" scope="session"></jsp:useBean>
 </head>
     <body>
-        <h3>Nom util</h3>
-        <p> La mise de #### euros sur le résultat #### pour le match : ####### vs ####### le ######################## a bien été annulée !</p>
-        <a href="#">Retour au menu</a>
+        <h3>Annulation du pari de l'utilisateur ${util.login}</h3>
+        <p> La mise de ${pari.montant} euros sur le résultat ${pari.vainqueur} pour le match : ${pari.match.equipe1} vs ${pari.match.equipe2} le ${pari.match.quand} a bien été annulée !</p>
+        <a href="/pel/menu">Retour au menu</a>
     </body>
 </html>
